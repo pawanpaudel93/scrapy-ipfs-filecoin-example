@@ -1,12 +1,11 @@
-from scrapy import Spider
-from scrapy.http import Request
+from scrapy import Spider, Request
 from books_crawler.items import Books
 
 class BooksSpider(Spider):
     name = 'books'
     allowed_domains = ['books.toscrape.com']
 
-    start_urls = ['http://books.toscrape.com']
+    start_urls = ['https://books.toscrape.com']
 
     def parse(self, response):
         books = response.xpath('//h3/a/@href').extract()
@@ -34,7 +33,6 @@ class BooksSpider(Spider):
         
         book['title'] = title
         book['price'] = price
-        # book['description'] = description
         book['rating'] = rating.strip()
         book['image_urls'] = [image_url]
         

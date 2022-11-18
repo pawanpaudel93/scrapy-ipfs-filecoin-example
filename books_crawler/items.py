@@ -12,6 +12,5 @@ class Books(Item):
     title = Field()
     price = Field()
     rating = Field()
-    # description = Field()
     image_urls = Field()
     images = Field()

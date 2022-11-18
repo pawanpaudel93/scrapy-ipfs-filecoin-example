@@ -89,3 +89,22 @@ ROBOTSTXT_OBEY = False
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+ITEM_PIPELINES = {'scrapy_ipfs_filecoin.pipelines.ImagesPipeline': 1}
+
+IMAGES_STORE = 'pn://images' # For Web3Storage
+
+from scrapy_ipfs_filecoin.feedexport import get_feed_storages
+FEED_STORAGES = get_feed_storages()
+
+W3S_API_KEY="<W3S_API_KEY>"
+LH_API_KEY="<LH_API_KEY>"
+PN_JWT_TOKEN="<PN_JWT_TOKEN>"
+FEEDS={
+	'pn://house.json': {
+		"format": "json"
+	},
+    'pn://house.csv': {
+        "format": "csv"
+    }
+}
