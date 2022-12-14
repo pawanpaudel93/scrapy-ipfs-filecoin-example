@@ -9,10 +9,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'books_crawler'
+BOT_NAME = "books_crawler"
 
-SPIDER_MODULES = ['books_crawler.spiders']
-NEWSPIDER_MODULE = 'books_crawler.spiders'
+SPIDER_MODULES = ["books_crawler.spiders"]
+NEWSPIDER_MODULE = "books_crawler.spiders"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'books_crawler (+http://www.yourdomain.com)'
@@ -92,7 +92,8 @@ ROBOTSTXT_OBEY = False
 
 ITEM_PIPELINES = {'scrapy_ipfs_filecoin.pipelines.ImagesPipeline': 1}
 
-IMAGES_STORE = 'pn://images' # For Web3Storage
+IMAGES_STORE = 'w3s://images' # For Web3Storage
+# IMAGES_STORE = "s3://scrapy-ipfs-filecoin/books/images/"  # For Filebase
 
 from scrapy_ipfs_filecoin.feedexport import get_feed_storages
 FEED_STORAGES = get_feed_storages()
@@ -100,11 +101,20 @@ FEED_STORAGES = get_feed_storages()
 W3S_API_KEY="<W3S_API_KEY>"
 LH_API_KEY="<LH_API_KEY>"
 PN_JWT_TOKEN="<PN_JWT_TOKEN>"
+
 FEEDS={
-	'pn://house.json': {
+	'w3s://house.json': {
 		"format": "json"
 	},
-    'pn://house.csv': {
+    'w3s://house.csv': {
         "format": "csv"
-    }
+    },
+    # "s3://scrapy-ipfs-filecoin/books/%(name)s_%(time)s.json": {"format": "json"},
+    # "s3://scrapy-ipfs-filecoin/books/%(name)s_%(time)s.csv": {"format": "csv"},
 }
+
+# For Filebase
+S3_ACCESS_KEY_ID = "<S3_ACCESS_KEY_ID>"
+S3_SECRET_ACCESS_KEY = "<S3_SECRET_ACCESS_KEY>"
+S3_ENDPOINT_URL = "https://s3.filebase.com"
+S3_IPFS_URL_FORMAT = "https://ipfs.filebase.io/ipfs/{cid}"

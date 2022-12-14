@@ -1,3 +1,4 @@
 scrapy
 pillow
+botocore
 scrapy-ipfs-filecoin
